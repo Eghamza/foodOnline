@@ -1,0 +1,8 @@
+#app secret
+SECRET_KEY=django-insecure-(0hm+hm8e+3qi6!wjl6q7pzfur*5phgwal#y!(s$9s-n1*x1_w
+#app database
+DEBUG=True
+NAME=foodonline
+USER=postgres
+PASSWORD=4939
+HOST=localhost
