@@ -85,8 +85,11 @@ DATABASES = {
     }
 }
 
-#change the defoult AUTH_USER_MODEL
+#media config
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR /'media'
 
+#change the defoult AUTH_USER_MODEL
 AUTH_USER_MODEL = 'accounts.User'
 
 
