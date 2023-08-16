@@ -78,16 +78,17 @@
                                                 </div>
                                             </div>
                                         </li>
+                                        <ul class="errorlist">
+                                            {% for field in form %}
+                                            {% if field.errors %}
+                                            {% for error in field.errors %}
+                                            <li style="color: red;">{{error}}</li>
+                                            {% endfor %}
+                                            {% endif %}
+                                            {% endfor %}
+                                            <li style="color: red;">{{form.non_field_errors}}</li>                                               
+                                        </ul>
                                         <li>
-                                            <ul class="errorlist">
-                                                {% for f in form %}
-
-                                                {% for e in f.errors %}
-                                                <li style="color: red;">{{ e}}</li>
-                                                {% endfor %}
-
-                                                {% endfor%}
-                                            </ul>
                                             <div class="row">
                                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                     <div class="field-holder">
@@ -96,6 +97,12 @@
                                                                 id="btn-next-restaurant-information" class="bgcolor">
                                                         </div>
                                                     </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div>
+                                                <!-- loading message -->
+                                                {% include 'include/message.html'%}
                                                 </div>
                                             </div>
                                         </li>

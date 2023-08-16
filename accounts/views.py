@@ -1,8 +1,7 @@
 from django.shortcuts import redirect, render
 from .forms import UserForm
 from .models import User
-
-# Create your views here.
+from django.contrib import messages
 
 
 def register(request):
@@ -15,15 +14,15 @@ def register(request):
             user.set_password(password)
             user.role = User.CUSTOMER
             user.save()
+            messages.success(request,"User registration successful ")
             return redirect('register')
-        else:
-            print("Invalid username or password")
-            print(form.errors)
+    else:
+        # print("Invalid username or password")
+        # print(form.errors)
 
-    form = UserForm()
+        form = UserForm()
     contex = {
         'form': form,
         'errors': form.errors
-
     }
     return render(request, 'accounts/registerUser.html', contex)
