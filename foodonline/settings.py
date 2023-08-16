@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+from django.contrib.messages import constants as messages
 from pathlib import Path
 from decouple import config
 
@@ -24,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG',cast=bool)
+DEBUG = config('DEBUG', cast=bool)
 
 ALLOWED_HOSTS = []
 
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts',
+    'vendor',
 ]
 
 MIDDLEWARE = [
@@ -80,16 +82,16 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': config('NAME'),
         'USER': config('USER'),
-        'PASSWORD':config('PASSWORD'),
-        'HOST':config('HOST')
+        'PASSWORD': config('PASSWORD'),
+        'HOST': config('HOST')
     }
 }
 
-#media config
+# media config
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR /'media'
+MEDIA_ROOT = BASE_DIR / 'media'
 
-#change the defoult AUTH_USER_MODEL
+# change the defoult AUTH_USER_MODEL
 AUTH_USER_MODEL = 'accounts.User'
 
 
@@ -139,10 +141,9 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-# making static the masages 
-from django.contrib.messages import constants as messages
+# making static the masages
 
 MESSAGE_TAGS = {
     messages.ERROR: "danger",
-    
+
 }

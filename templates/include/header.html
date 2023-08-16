@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -35,6 +36,7 @@
         }
     </style>
 </head>
+
 <body>
     <!--Main Wrapper-->
     <div class="wrapper">
@@ -70,8 +72,10 @@
                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                             <div class="login-option">
                                 <a class="cs-color cs-popup-joinus-btn login-popup" data-target="#sign-in"
-                                    data-toggle="modal" href="#user-register">Login</a>/<a class="cs-color cs-popup-joinus-btn login-popup ml-0" href="{% url 'register' %}"><span> Register </span></a> <a
-                                    class="get-start-btn" href="register-restaurant.html">
+                                    data-toggle="modal" href="#user-register">Login</a>/<a
+                                    class="cs-color cs-popup-joinus-btn login-popup ml-0"
+                                    href="{% url 'register' %}"><span> Register </span></a> <a class="get-start-btn"
+                                    href="{% url 'registervendor'%}">
                                     Register
                                     Restaurant </a>
                             </div>
