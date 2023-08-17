@@ -36,6 +36,9 @@ def register(request):
             user.set_password(password)
             user.role = User.CUSTOMER
             user.save()
+
+            email_verification(request, user)
+            
             messages.success(request, "User registration successful ")
             return redirect('register')
     else:
