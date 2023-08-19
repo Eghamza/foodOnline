@@ -12,6 +12,13 @@ urlpatterns = [
     path('customerDashboard/', views.customerDashboard, name='customerDashboard'),
     path('vendorDashboard/', views.vendorDashboard, name='vendorDashboard'),
     path('dashbourd/', views.dashbourd, name='dashbourd'),
-    path('activate/<uidb64>/<token>',views.activate, name='activate'),
+
+
+    path('activate/<uidb64>/<token>/',views.activate, name='activate'),
+    
+#foget password verification
+    path('forget_password/', views.forget_password, name='forget_password'),
+    path('reset_password_verify/<uidb64>/<token>/',views.reset_password_validate,name='reset_password_validate'),
+    path('reset_password/',views.reset_password,name='reset_password'),
     
 ]

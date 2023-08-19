@@ -3,7 +3,7 @@
 Hi {{user.username}},
 please click on bilow link to confirm your registration
 
-href="http://{{ domain }}{% url 'activate' uidb64=uid token=token %}"
+href="http://{{ domain }}{% url 'reset_password_validate' uidb64=uid token=token %}"
 
 
 {%endautoescape%}
