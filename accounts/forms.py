@@ -1,6 +1,6 @@
 from typing import Any, Dict
 from django import forms
-from .models import User
+from .models import User, UserProfile
 
 
 class UserForm(forms.ModelForm):
@@ -18,3 +18,12 @@ class UserForm(forms.ModelForm):
 
         if c_paswd != password:
             raise forms.ValidationError("conform password not match!")
+
+
+
+class UserProfileForm(forms.ModelForm):
+    profile_picture = forms.ImageField(widget=forms.FileInput(attrs={'class':'btn btn-info'})) #css
+    cover_photo = forms.ImageField(widget=forms.FileInput(attrs={'class':'btn btn-info' }))
+    class Meta:
+        model = UserProfile
+        fields = ['profile_picture', 'cover_photo', 'address_line_1','address_line_2','country','state','city','pin_code','latitude','longtitude']
