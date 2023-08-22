@@ -16,18 +16,22 @@ def profile(request):
     if request.method == 'POST':
         user_p = UserProfileForm(request.POST,request.FILES,instance=user_profile)
         vendor =vendonForm(request.POST,request.FILES,instance=vender_instance)
-        if user_p.is_valid and vendor.is_valid:
+        if user_p.is_valid() and vendor.is_valid():
             user_p.save()
             vendor.save()
             messages.success(request,"Profile updated")
             return redirect('vprofile')
         else:
-            pass
+           print("--------------------",user_p.errors)
+           print("--------------------",vendor.errors)
+    
     else:
+        print("-------------------- hello world")
         vendon = vendonForm(instance=vender_instance)
-        profile = UserProfileForm(instance = user_profile)
+        p = UserProfileForm(instance = user_profile)
+
     context ={
-        'profile':profile,
+        'profile': p,
         'vendorform': vendon,
         'user_p':user_profile,
         'vender_instance': vender_instance,
