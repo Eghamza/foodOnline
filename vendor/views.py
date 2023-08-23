@@ -24,12 +24,12 @@ def profile(request):
            print("--------------------",vendor.errors)
     
     else:
-        vendon = vendonForm(instance=vender_instance)
-        p = UserProfileForm(instance = user_profile)
+        vendor = vendonForm(instance=vender_instance)
+        user_p = UserProfileForm(instance = user_profile)
 
     context ={
-        'profile': p,
-        'vendorform': vendon,
+        'profile': user_p,
+        'vendorform': vendor,
         'user_p':user_profile,
         'vender_instance': vender_instance,
     }
