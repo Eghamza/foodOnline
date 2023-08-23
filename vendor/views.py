@@ -8,10 +8,8 @@ from django.contrib import messages
 
 
 def profile(request):
-    user_profile = get_object_or_404(UserProfile,user = request.user)
-    
+    user_profile = get_object_or_404(UserProfile,user = request.user)   
     vender_instance = get_object_or_404(Vendor, user = request.user)
-    
     #update 
     if request.method == 'POST':
         user_p = UserProfileForm(request.POST,request.FILES,instance=user_profile)
@@ -26,7 +24,6 @@ def profile(request):
            print("--------------------",vendor.errors)
     
     else:
-        print("-------------------- hello world")
         vendon = vendonForm(instance=vender_instance)
         p = UserProfileForm(instance = user_profile)
 
@@ -37,3 +34,6 @@ def profile(request):
         'vender_instance': vender_instance,
     }
     return render(request, 'vendor/vprofile.html',context)
+
+def menu_builder(request):
+    return render(request, 'vendor/menu_builder.html')

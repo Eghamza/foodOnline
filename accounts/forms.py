@@ -23,8 +23,9 @@ class UserForm(forms.ModelForm):
 
 
 class UserProfileForm(forms.ModelForm):
+    address = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'address'}))
     profile_picture = forms.ImageField(widget=forms.FileInput(attrs={'class':'btn btn-info'}), validators=[allow_only_image_validators]) #css
     cover_photo = forms.ImageField(widget=forms.FileInput(attrs={'class':'btn btn-info' }),validators=[allow_only_image_validators])
     class Meta:
         model = UserProfile
-        fields = ['profile_picture', 'cover_photo', 'address_line_1','address_line_2','country','state','city','pin_code','latitude','longtitude']
+        fields = ['profile_picture', 'cover_photo','address','country','state','city','pin_code','latitude','longtitude']
