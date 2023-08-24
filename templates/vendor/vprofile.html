@@ -38,11 +38,11 @@
 														<div class="text-holder">
 															<label>Update profile </label>
 															<div class="upload-gallery">
-																<label class="text-dengor"> {{profile.profile_picture}}
+																<label> 
+																	{{profile.profile_picture}}
 																</label>
 															</div>
-															<label
-																class="text-danger">{{profile.profile_picture.errors}}</label>
+															<label class="text-danger">{{profile.profile_picture.errors}}</label>
 														</div>
 													</div>
 												</div>
@@ -65,8 +65,7 @@
 															<div class="upload-gallery">
 																{{profile.cover_photo}}
 															</div>
-															<label
-																class="text-danger">{{profile.cover_photo.errors}}</label>
+															<label class="text-danger">{{profile.cover_photo.errors}}</label>
 
 														</div>
 													</div>
@@ -91,8 +90,7 @@
 															<div class="upload-gallery">
 																{{vendorform.vendor_licence}}
 															</div>
-															<label
-																class="text-danger">{{vendorform.vendor_licence.errors}}</label>
+															<label class="text-danger">{{vendorform.vendor_licence.errors}}</label>
 
 														</div>
 													</div>
