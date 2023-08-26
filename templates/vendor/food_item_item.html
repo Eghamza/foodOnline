@@ -13,6 +13,9 @@
             <div class="user-holder">
               <h4 class="text-uppercase">Built Your food menu</h4>
               <hr />
+              <a href="{% url 'menu_builder' %}"class="btn btn-outline-danger btn-sm"><i class="fa fa-arrow-left "></i> back</a>
+              <br />
+              <br /><br />
               <h4> Category: <span class="text-success"> {{categories}} </span></h4>
               {% if fooditem %}
               <table class="table table-hover table-borderless">

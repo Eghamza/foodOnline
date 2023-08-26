@@ -5,6 +5,8 @@ from .models import Vendor
 from  .forms import vendonForm
 from menu.models import Categry, FoodItem
 from django.contrib import messages
+from menu.forms import add_category_forms
+from django.template.defaultfilters import slugify
 # Create your views here.
 
 
@@ -54,3 +56,56 @@ def food_item_category(request,pk=None):
                }
 
     return render(request, 'vendor/food_item_item.html',context)
+
+
+
+def add_category(request):
+    form = add_category_forms(request.POST)
+    if request.method == 'POST':
+        if form.is_valid():
+            vendor = Vendor.objects.get(user = request.user)
+            category=form.save(commit=False)
+            category_name = form.cleaned_data['category_name']
+            category.vendor = vendor
+            category.slug = slugify(category_name)
+            category.save()
+            messages.success(request,"category added successfully")
+            return redirect('menu_builder')
+        else:
+            print(form.errors)
+    else:
+        form = add_category_forms()
+
+
+    context ={
+        'form':form
+
+    }
+    return render(request, 'vendor/add_category.html',context)
+
+
+
+def edit_category(request, pk=None):
+    categry = get_object_or_404(Categry, pk=pk)
+    if request.method == 'POST':
+        form = add_category_forms(request.post, instance=categry)
+        if form.is_valid():
+            vendor = Vendor.objects.get(user = request.user)
+            category=form.save(commit=False)
+            category_name = form.cleaned_data['category_name']
+            category.vendor = vendor
+            category.slug = slugify(category_name)
+            category.save()
+            messages.success(request,"category Edit successfully")
+            return redirect('menu_builder')
+        else:
+            pass
+    else:
+        form = add_category_forms(instance= categry)
+
+    context= {
+        'form': form,
+        'category': categry
+
+    }
+    return render(request, 'vendor/edit_category.html',context)
