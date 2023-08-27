@@ -6,6 +6,15 @@ urlpatterns = [
     path('menu_builder/', views.menu_builder, name='menu_builder'),
     path('food_item_category/<int:pk>',views.food_item_category, name='food_item_category'),
 
-    path('add_category/', views.add_category, name='add_category'),
-    path('edit_category/<int:pk>', views.edit_category, name='edit_category'),
+
+
+    #category crud
+    path('menu_builder/category/add', views.add_category, name='add_category'),
+    path('menu_builder/category/edit/<int:pk>', views.edit_category, name='edit_category'),
+    path('menu_builder/category/delete/<int:pk>', views.delete_category, name='delete_category'),
+
+    #food item 
+    path('menu_builder/food/add', views.add_food, name='add_food'),
+    path('menu_builder/food/edit/<int:pk>', views.edit_food, name='edit_food'),
+    path('menu_builder/food/delete/<int:pk>', views.delete_food, name='delete_food'),
 ]

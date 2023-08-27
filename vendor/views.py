@@ -5,7 +5,7 @@ from .models import Vendor
 from .forms import vendonForm
 from menu.models import Categry, FoodItem
 from django.contrib import messages
-from menu.forms import add_category_forms
+from menu.forms import add_category_forms,food_item_forms
 from django.template.defaultfilters import slugify
 # Create your views here.
 
@@ -109,3 +109,58 @@ def edit_category(request, pk=None):
 
     }
     return render(request, 'vendor/edit_category.html', context)
+
+
+def delete_category(request,pk=None):
+    categry = get_object_or_404(Categry, pk=pk)
+    categry.delete()
+    return redirect('menu_builder')
+
+
+
+def add_food(request):
+    vendor = Vendor.objects.get(user = request.user)
+    form = food_item_forms(request.POST,request.FILES)
+    if request.method == 'POST':
+        if form.is_valid():
+            food = form.save(commit=False)
+            food.vendor = vendor
+            food_title = form.cleaned_data['food_title']
+            food.slug = slugify(food_title)
+            food.save()
+            messages.success(request, 'food added successfully')
+            return redirect('food_item_category',food.categry.id)
+        else:
+            form.errors
+    else:
+        form = food_item_forms()
+
+    context = {'food':form}
+    return render(request, 'vendor/add_food.html',context)
+
+
+def edit_food(request, pk=None):
+    food = get_object_or_404(FoodItem,pk=pk)
+    form = food_item_forms(request.POST,request.FILES,instance= food)
+    if request.method == 'POST':
+        vendor = Vendor.objects.get(user = request.user)
+        if form.is_valid():
+            food = form.save(commit=False)
+            food_title = form.cleaned_data['food_title']
+            food.slug = slugify(food_title)
+            food.vendor = vendor
+            food.save()
+            messages.success(request, 'food edite successfully')
+            return redirect('food_item_category',food.categry.id)
+        else:
+            form.errors
+    else:
+        form =food_item_forms(instance=food)
+
+    context = {'food':form, 'form':food}
+    return render(request, 'vendor/edit_food.html',context)
+
+def delete_food(request,pk=None):
+    food = get_object_or_404(FoodItem,pk=pk)
+    food.delete()
+    return redirect('food_item_category',food.categry.id)
