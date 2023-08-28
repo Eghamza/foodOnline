@@ -13,6 +13,9 @@
             <div class="user-holder">
               <h3 class="text-uppercase">EDIT CATEGORY</h3>
               <hr />
+              <a href="{% url 'menu_builder' %}"class="btn btn-outline-danger btn-sm"><i class="fa fa-arrow-left "></i> back</a>
+              
+              <br>
               <form action="{% url 'edit_category' category.id %}"
                 class="form-fields-set foodbakery-dev-restaurant-form" method="POST">
                 {% csrf_token%}
