@@ -134,6 +134,8 @@ def add_food(request):
             form.errors
     else:
         form = food_item_forms()
+        #modified from
+        form.fields['categry'].queryset = Categry.objects.filter(vendor = vendor)
 
     context = {'food':form}
     return render(request, 'vendor/add_food.html',context)
@@ -156,6 +158,7 @@ def edit_food(request, pk=None):
             form.errors
     else:
         form =food_item_forms(instance=food)
+        form.fields['categry'].queryset = Categry.objects.filter(vendor = vendor)
 
     context = {'food':form, 'form':food}
     return render(request, 'vendor/edit_food.html',context)
