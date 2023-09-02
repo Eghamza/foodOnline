@@ -25,7 +25,7 @@ class Categry(models.Model):
 
 class FoodItem(models.Model):
     vendor = models.ForeignKey(Vendor, models.CASCADE)
-    categry = models.ForeignKey(Categry,models.CASCADE)
+    categry = models.ForeignKey(Categry,models.CASCADE,related_name='fooditems')
     food_title = models.CharField(max_length=50)
     slug = models.SlugField(max_length=100, unique= True)
     discription = models.TextField(max_length=255, blank=True)

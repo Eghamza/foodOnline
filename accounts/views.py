@@ -10,6 +10,7 @@ from django.core.exceptions import PermissionDenied
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.http import urlsafe_base64_decode
 from django.utils.http import urlsafe_base64_decode
+from django.template.defaultfilters import slugify
 from vendor.models import Vendor
 
 
@@ -79,6 +80,8 @@ def registervendor(request):
             vendor_username = v_form.save(commit=False)
             vendor_username.user = user  # get the created user
             vendor_user_profile = UserProfile.objects.get(user=user)  # get the created user profile
+            vendor_name = v_form.cleaned_data['vendor_name']
+            vendor_username.slug = slugify(vendor_name) +'-'+ str(user.id)
             vendor_username. user_profile = vendor_user_profile
             vendor_username.save()
             

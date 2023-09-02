@@ -25,8 +25,7 @@ def profile(request):
             messages.success(request, "Profile updated")
             return redirect('vprofile')
         else:
-            print("--------------------", user_p.errors)
-            print("--------------------", vendor.errors)
+           pass
 
     else:
         vendor = vendonForm(instance=vender_instance)
