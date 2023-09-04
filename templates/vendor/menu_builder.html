@@ -52,4 +52,92 @@
     </div>
 </div>
 <!-- Main Section End -->
+
+<!-- 
+<div class="row">
+    <div class="col-6">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td><i class="btn btn-outline-danger fa fa-pencil edit-icon"></i></td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td><i class="btn btn-outline-danger fa fa-pencil edit-icon"></i></td>
+                </tr>
+                <!-- Add more rows as needed -->
+            </tbody>
+        </table>
+        
+    </div>
+
+    
+
+
+
+<!-- <-- <div class="col-2">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">ID:  <span id="num" class="badge bg-primary rounded-pill"></span></li>
+        <li class="list-group-item">First:  <span id="f" style=" padding-left: 10px;" class="fw-bold"></span></li>
+        <li class="list-group-item">Last:  <span id="l" class="badge bg-primary rounded-pill"></span></li>
+      </ul>
+
+</div>
+<div class="col-4 list-group list-group-flush ">
+    <h1>hi helo</h1>
+</div>
+</div> --> -->
+
+
+
+
+
+<!-- <script>
+    // Get the edit icons using their class
+    var editIcons = document.getElementsByClassName('edit-icon');
+
+    // Loop through each edit icon
+    for (var i = 0; i < editIcons.length; i++) {
+        // Attach click event listener to each edit icon
+        editIcons[i].addEventListener('click', function() {
+            // Get the corresponding row data
+            var row = this.parentNode.parentNode;
+            var rowData = {
+                number: row.cells[0].innerText,
+                first: row.cells[1].innerText,
+                last: row.cells[2].innerText
+            };
+
+            var num = document.getElementById('num');
+            var f = document.getElementById('f');
+            var l = document.getElementById('l');
+            num.innerHTML = rowData.number
+            f.innerHTML = rowData.first
+            l.innerHTML = rowData.last
+
+
+            // Create a new list item
+            // var listItem = document.createElement('li');
+            // listItem.classList.add('list-group-item');
+            // listItem.innerText = 'First: ' + rowData.first + ', Last: ' + rowData.last;
+
+            // Append the new list item to the list
+            // document.getElementById('my-list').appendChild(listItem);
+        });
+    }
+</script> -->
+
 {%endblock%}

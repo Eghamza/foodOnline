@@ -1,0 +1,114 @@
+{% extends 'base.html'%}
+{% block contant %}
+<div class="main-section">
+  
+    <div class="page-section pt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                    <div class="tabs-holder horizontal">
+                        <ul class="stickynav-tabs nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#home"><i class="fa fa-shopping-cart text-danger"></i>cart</a></li>
+                            
+                        </ul>
+                        <div class="tab-content">
+                            <div id="home" class="tab-pane in active">
+                                <div class="menu-itam-holder">
+                                    
+                                    <div id="menu-item-list-6272" class="menu-itam-list">
+                                        
+                                   
+                                        <ul>
+                                            {% for item in cart_items %}
+                                            <li>
+                                                <div class="image-holder"> <a href="{{item.fooditem.image.url}}"><img src="{{item.fooditem.image.url}}" alt=""></a></div>
+                                                <div class="text-holder">
+                                                    <h6>{{item.fooditem.food_title}}</h6>
+                                                    <span> {{item.fooditem.discription}}</span>
+                                                </div>
+                                                <div class="price-holder">
+                                                    <span class="price">$ {{item.fooditem.price}}</span>
+                                                    <a href="#" class="dicrease_cart" data-id="{{item.fooditem.id}}" data-url="{% url 'dicrease_cart' item.fooditem.id %}" style="margin-right: 28px;">
+                                                        <i class="icon-minus text-color"></i>
+                                                    </a>
+                                                    <label  id="qty-{{item.fooditem.id}}">0</label>
+                                                    <a href="#" class="add_to_cart" data-id="{{item.fooditem.id}}" data-url="{% url 'add_to_cart' item.fooditem.id %}">
+                                                        <i class="icon-plus4 text-color"></i>
+                                                    </a>
+                                                    <span id="add-menu-loader-10"></span>
+                                                </div>
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+                                        {% for item in cart_items %}
+                                        <span id="qty-{{item.fooditem.id}}" class="qty_item d-none" data-qty ="{{itemfooditem.quentity}}" >{{item.fooditem.id}}</span>
+                                        {% endfor %}
+                                    </div>
+                                
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <!-- order -->
+                <div class="col-lg-4 col-md-4 col-sm-8 col-xs-12">
+                    <div class="tabs-holder horizontal">
+                        <ul class="stickynav-tabs nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#home"><i class="icon- icon-room_service"></i>your order</a></li>
+                            
+                        </ul>
+                        <div class="tab-content">
+                            <div id="home" class="tab-pane in active">
+                                <div class="menu-itam-holder">
+                                    
+                                    <div>
+                                        <ul>
+                                            <li style="list-style-type: none;">
+                                                Subtotal
+                                                <span class="price float-right">
+                                                    <span class="currecy">$</span>
+                                                    <span id="subtotal">0</span>
+
+                                                </span>
+
+
+                                            </li>
+                                            <li style="list-style-type: none;">
+                                                Tex
+                                                <span class="price float-right">
+                                                    <span class="currecy">$</span>
+                                                    <span id="subtotal">0</span>
+
+                                                </span>
+
+
+                                            </li>
+                                            <li style="list-style-type: none; font-weight: 600;">
+                                                Total
+                                                <span class="price float-right">
+                                                    <span class="currecy">$</span>
+                                                    <span id="subtotal">0</span>
+
+                                                </span>
+
+
+                                            </li>
+                                            
+                                        </ul>
+                                    </div>
+                             
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <!-- end order -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Main Section End --
+{% endblock %}

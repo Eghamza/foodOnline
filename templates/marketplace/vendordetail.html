@@ -97,7 +97,7 @@
                                     
                                     <div id="menu-item-list-6272" class="menu-itam-list">
                                         
-                                        {% for category in categories%}
+                                    {% for category in categories %}
                                         
                                         <div class="element-title" id="menu-category-2">
                                             <h5 class="text-color">{{category.category_name}}</h5>
@@ -116,8 +116,8 @@
                                                     <a href="#" class="dicrease_cart"  style="margin-right: 28px;">
                                                         <i class="icon-minus text-color"></i>
                                                     </a>
-                                                    <label  class="qty">0</label>
-                                                    <a href="#" class="add_to_cart">
+                                                    <label  id="qty-{{food.id}}">0</label>
+                                                    <a href="#" class="add_to_cart" data-id="{{food.id}}" data-url="{% url 'add_to_cart' food.id %}">
                                                         <i class="icon-plus4 text-color"></i>
                                                     </a>
                                                     <span id="add-menu-loader-10"></span>
@@ -127,6 +127,9 @@
                                         </ul>
                                         {% endfor %}
                                     </div>
+                                {% for item in cart_item%}
+                                <span id="qty-{{item.fooditem.id}}" class="qty_item" data-qty ="{{item.quentity}}" >{{item.quentity}}</span>
+                                {% endfor %}
                                 </div>
                             </div>
                             

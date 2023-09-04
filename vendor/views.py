@@ -143,8 +143,8 @@ def add_food(request):
 def edit_food(request, pk=None):
     food = get_object_or_404(FoodItem,pk=pk)
     form = food_item_forms(request.POST,request.FILES,instance= food)
+    vendor = Vendor.objects.get(user = request.user)
     if request.method == 'POST':
-        vendor = Vendor.objects.get(user = request.user)
         if form.is_valid():
             food = form.save(commit=False)
             food_title = form.cleaned_data['food_title']

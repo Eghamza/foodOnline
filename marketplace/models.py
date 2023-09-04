@@ -5,7 +5,7 @@ from menu.models import FoodItem
 
 # Create your models here.
 
-class cart(models.Model):
+class Cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     fooditem = models.ForeignKey(FoodItem, on_delete=models.CASCADE)
     quentity = models.PositiveIntegerField()
