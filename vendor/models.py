@@ -1,6 +1,8 @@
+
 from django.db import models
 from accounts.models import User, UserProfile
 from accounts import utils
+from datetime import time
 
 # Create your models here.
 
@@ -43,3 +45,24 @@ class Vendor(models.Model):
 
                 
         return super(Vendor, self).save(*args, **kwargs)
+    
+DAYS = [
+    (1,('monday')),
+    (2,('tuesday')),
+    (3,('wednesday')),
+    (4,('thursday')),
+    (5,('friday')),
+    (6,('saturday')),
+    (7,('sunday')),
+]
+HOURS_OF_OPENING = [(time(h,m).strftime('%I:%M:%p'),time(h,m).strftime('%I:%M:%p')) for h in range(0,24) for m in range(0,30)]    
+class OpeningHours(models.Model):
+    vendor = models.ForeignKey(Vendor,on_delete=models.CASCADE)
+    day = models.IntegerField(choices=DAYS)
+    from_hour = models.CharField(choices=HOURS_OF_OPENING,max_length=10)
+    to_hour = models.CharField(choices=HOURS_OF_OPENING,max_length=10)
+    is_closed = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ('day','from_hour')
+        unique_together = ('day','from_hour','to_hour')
