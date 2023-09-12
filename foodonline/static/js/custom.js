@@ -121,6 +121,13 @@ $(document).ready(function () {
 
     $("#" + the_id).html(qty);
   });
+
+
+  document.getElementById('add-hour').addEventListener('click', function(e) {
+  e.preventDefault();
+  alert('Please enter');
+});
+  //end documentment
 });
 
 
