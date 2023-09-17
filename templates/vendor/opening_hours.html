@@ -3,7 +3,8 @@
 {% block contant %}
 <!-- Main Section Start -->
 <div class="main-section">
- {% include 'include/cover.html'%}
+    {% include 'include/cover.html'%}
+
     <div class="page-section account-header buyer-logged-in">
         <div class="container">
             <div class="row">
@@ -13,29 +14,32 @@
                 <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
                     <div class="user-dashboard loader-holder">
                         <div class="user-holder">
-                            
+
                             <h3 class="text-uppercase">Opening Hours</h3>
                             <hr>
                             <div>
                                 <table class="table opening_hours  table-borderless" style="width: 500px;">
                                     {% for op in opening%}
-                                <tr>
-                                    <td><b>{{op}}</b> </td>
-                                    <td>{% if op.is_closed %} Closed {% else %}{{op.from_hour}} - {{op.to_hour}}{%endif%}</td>
-                                    <td> <a href="#s">Remove</a></td>
-                                </tr>
-                                {% endfor %}
+                                    <tr>
+                                        <td><b>{{op}}</b> </td>
+                                        <td>{% if op.is_closed %} Closed {% else %}{{op.from_hour}} -
+                                            {{op.to_hour}}{%endif%}</td>
+                                        <td> <a href="#s">Remove</a></td>
+                                    </tr>
+                                    {% endfor %}
 
                                 </table>
                             </div>
                             <form id="opening-hours">
+                                {% csrf_token %}
                                 <div class="row">
-                                    <div class="col-2">{{form.day}}</div>
-                                    <div class="col-2">{{form.from_hour}}</div>
-                                    <div class="col-2">{{form.to_hour}}</div>
-                                    <div class="col-2">{{form.is_closed}} is Close</div>
-                                   
-                                    <div class="col-2"><button id="add-hour" class="btn btn-success btn-sm">ADD HOURS</button></div>
+                                    <div class="col-3">{{form.day}}</div>
+                                    <div class="col-2" style="padding: 0px 0px !important;">{{form.from_hour}}</div>
+                                    <div class="col-2" style="padding: 0px 5px !important;">{{form.to_hour}}</div>
+                                    <div class="col-3">{{form.is_closed}} is Close</div>
+
+                                    <div class="col-2"><button id="add-hour" class="btn btn-success btn-sm">ADD
+                                            HOURS</button></div>
                                 </div>
 
                             </form>
