@@ -127,25 +127,35 @@ $(document).ready(function () {
     var from_hour = document.getElementById('id_from_hour').value
     var to_hour = document.getElementById('id_to_hour').value
     var check = document.getElementById('id_is_closed').checked
-
+    var url = document.getElementById('add_hour_url').value
     var csrf_token = $('input[name="csrfmiddlewaretoken"]').val()
 
 
-    if(check){
-      check ='True';
-      condition ="day != ''";
+    if (check) {
+      check = 'True';
+      condition = "day != ''";
     }
-    else{
-      check ='False';
-      condition ="day != '' && from_hour != '' && to_hour != ''";
+    else {
+      check = 'False';
+      condition = "day != '' && from_hour != '' && to_hour != ''";
     }
-    if(eval(condition)){
+    if (eval(condition)) {
+      $.ajax({
+        type: 'POST',
+        url: 'url',
+        success: function (response) {
+          console.log(response);
 
-      console.log(csrf_token, day, from_hour, to_hour, check);
+        }
+
+
+      })
+
+      console.log(csrf_token, day, from_hour, to_hour, check, url);
 
     }
-    else{
-      swal.fire('please fill all fields ','','info');
+    else {
+      swal.fire('please fill all fields ', '', 'info');
 
     };
   });

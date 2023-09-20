@@ -6,6 +6,7 @@ from .forms import vendonForm, openingForm
 from menu.models import Categry, FoodItem
 from django.contrib import messages
 from menu.forms import add_category_forms,food_item_forms
+from django.http import HttpResponse,JsonResponse
 from django.template.defaultfilters import slugify
 # Create your views here.
 
@@ -179,3 +180,7 @@ def opening_hours(request):
     }
     
     return render(request, 'vendor/opening_hours.html',context)
+
+
+def add_opening_hours(request):
+   return JsonResponse("_opening")
