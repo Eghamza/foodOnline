@@ -8,6 +8,7 @@ from django.contrib import messages
 from menu.forms import add_category_forms,food_item_forms
 from django.http import HttpResponse,JsonResponse
 from django.template.defaultfilters import slugify
+from .models import OpeningHours
 # Create your views here.
 
 
@@ -183,4 +184,20 @@ def opening_hours(request):
 
 
 def add_opening_hours(request):
-   return JsonResponse("_opening")
+   if request.user.is_authenticated:
+       if request.headers.get('x-requested-with') == 'XMLHttpRequest' and request.method == 'POST':
+           vender = Vendor.objects.get(user = request.user)
+           day = request.POST.get('day')
+           from_hour = request.POST.get('from_hour')
+           to_hour = request.POST.get('to_hour')
+           is_close = request.POST.get('check')
+           try:
+              hour = OpeningHours.object.create(vendor= vender,day=day,from_hour=from_hour, to_hour=to_hour, is_close=is_close)
+              response = {'status':'success','message':'Add Hour Successfully'}
+              return JsonResponse(response)
+           except :
+               print(vender,day,from_hour,to_hour,is_close)
+               response ={'status':'Failed','message':'Failed to add'}
+               return JsonResponse(response)
+           
+   return JsonResponse({'status':'Failed','message':'adding hours successfully'})

@@ -142,16 +142,31 @@ $(document).ready(function () {
     if (eval(condition)) {
       $.ajax({
         type: 'POST',
-        url: 'url',
+        url: url,
+        data:{
+          'day': day,
+          'from_hour': from_hour,
+          'to_hour': to_hour,
+          'csrfmiddlewaretoken': csrf_token,
+          'check': check,
+
+        },
         success: function (response) {
-          console.log(response);
+          if (response.status == "success"){
+            console.log(response.message);
+
+          }
+          else if (response.status == "Failed"){
+            console.log(response.message);
+
+          }
 
         }
 
 
       })
 
-      console.log(csrf_token, day, from_hour, to_hour, check, url);
+      //console.log(csrf_token, day, from_hour, to_hour, check, url);
 
     }
     else {
