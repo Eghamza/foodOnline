@@ -9,6 +9,7 @@ from menu.forms import add_category_forms,food_item_forms
 from django.http import HttpResponse,JsonResponse
 from django.template.defaultfilters import slugify
 from .models import OpeningHours
+from django.db import IntegrityError
 # Create your views here.
 
 
@@ -192,12 +193,26 @@ def add_opening_hours(request):
            to_hour = request.POST.get('to_hour')
            is_close = request.POST.get('check')
            try:
-              hour = OpeningHours.object.create(vendor= vender,day=day,from_hour=from_hour, to_hour=to_hour, is_close=is_close)
-              response = {'status':'success','message':'Add Hour Successfully'}
+              hour = OpeningHours(vendor= vender,day=day,from_hour=from_hour, to_hour=to_hour, is_closed=is_close)
+              hour.save()
+              if hour:
+                  days = OpeningHours.objects.get(id=hour.id)
+                  if days.is_closed:
+                    response = {'status':'success','message':'Add Hour Successfully','id':hour.id, 'day':days.get_day_display(),'is_closed':'Closed'}
+                    return JsonResponse(response)                  
+                  else:
+                    response = {'status':'success','message':'Add Hour Successfully','id':hour.id, 'day':days.get_day_display(),'from_hour':hour.from_hour,'to_hour':to_hour}
               return JsonResponse(response)
-           except :
-               print(vender,day,from_hour,to_hour,is_close)
-               response ={'status':'Failed','message':'Failed to add'}
+           except IntegrityError as e:
+               
+               response ={'status':'Failed','message': from_hour+'-'+to_hour+ 'already exists'}
                return JsonResponse(response)
            
    return JsonResponse({'status':'Failed','message':'adding hours successfully'})
+
+def remove_opening_hours(request,pk=None):
+    if request.user.is_authenticated:
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            hour = get_object_or_404(OpeningHours,pk=pk)
+            hour.delete()
+            return JsonResponse({'status':'success','message':'Removing hours successfully'})

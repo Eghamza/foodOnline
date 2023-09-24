@@ -20,11 +20,11 @@
                             <div>
                                 <table class="table opening_hours  table-borderless" style="width: 500px;">
                                     {% for op in opening%}
-                                    <tr>
+                                    <tr id="hour-{{op.id}}">
                                         <td><b>{{op}}</b> </td>
                                         <td>{% if op.is_closed %} Closed {% else %}{{op.from_hour}} -
                                             {{op.to_hour}}{%endif%}</td>
-                                        <td> <a href="#s">Remove</a></td>
+                                        <td> <a class="remove" href="#s" data-url="{% url 'remove_opening_hours' op.id %}"="">Remove</a></td>
                                     </tr>
                                     {% endfor %}
 
@@ -39,8 +39,7 @@
                                     <div class="col-3">{{form.is_closed}} is Close</div>
                                     <input type="hidden" value="{% url 'add_opening_hours'%}" id="add_hour_url">
 
-                                     <div class="col-2"><button id="add-hour" class="btn btn-success btn-sm">ADD
-                                            HOURS</button></div>
+                                    <div class="col-2"><button id="add-hour" class="btn btn-success btn-sm">ADD HOURS</button></div>
                                 </div>
 
                             </form>

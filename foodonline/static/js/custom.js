@@ -119,8 +119,8 @@ $(document).ready(function () {
 
     $("#" + the_id).html(qty);
   });
-
-
+});
+  // add opening hour
   document.getElementById('add-hour').addEventListener('click', function (e) {
     e.preventDefault();
     var day = document.getElementById('id_day').value
@@ -152,21 +152,34 @@ $(document).ready(function () {
 
         },
         success: function (response) {
-          if (response.status == "success"){
-            console.log(response.message);
+            if (response.status == "success"){
+              if (response.is_closed == "Closed")
+              {
+                html = '<tr><td><b>'+response.day+'</b> </td><td> Closed </td><td> <a href="#s">Remove</a></td></tr>';
+              $(".opening_hours").append(html);
+              
+              }
+              else{
 
-          }
-          else if (response.status == "Failed"){
-            console.log(response.message);
+                html = '<tr><td><b>'+response.day+'</b> </td><td>'+ response.from_hour +' - '+ response.to_hour +'</td><td> <a href="#s">Remove</a></td></tr>';
+                $(".opening_hours").append(html);
+                
+              }
+              document.getElementById('opening-hours').reset()
+             
 
-          }
+            }
+            else if (response.status == "Failed"){
+              swal.fire(response.message,'', "error")
+             
+
+            }
 
         }
 
 
       })
 
-      //console.log(csrf_token, day, from_hour, to_hour, check, url);
 
     }
     else {
@@ -175,7 +188,23 @@ $(document).ready(function () {
     };
   });
   //end documentment
-});
+
+
+//remove opening hours
+$(".remove").on('click',function(e) {
+  e.preventDefault();
+  url = $(this).attr('data-url');
+  $.ajax({
+    type: "GET",
+    url: url,
+    success: function(response){
+      if (response.status == "success")
+      {
+        console.log(response.message)
+      }
+    }
+  })
+})
 
 
 function removecart(cart_qty, cart_id) {
