@@ -183,7 +183,7 @@ def opening_hours(request):
     
     return render(request, 'vendor/opening_hours.html',context)
 
-
+# add hour
 def add_opening_hours(request):
    if request.user.is_authenticated:
        if request.headers.get('x-requested-with') == 'XMLHttpRequest' and request.method == 'POST':
@@ -210,9 +210,10 @@ def add_opening_hours(request):
            
    return JsonResponse({'status':'Failed','message':'adding hours successfully'})
 
+# edit hour
 def remove_opening_hours(request,pk=None):
     if request.user.is_authenticated:
         if request.headers.get('x-requested-with') == 'XMLHttpRequest':
             hour = get_object_or_404(OpeningHours,pk=pk)
             hour.delete()
-            return JsonResponse({'status':'success','message':'Removing hours successfully'})
+            return JsonResponse({'status':'success','message':'Removing hours successfully','id':pk})

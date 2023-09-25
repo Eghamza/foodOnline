@@ -2,7 +2,8 @@
 from django.db import models
 from accounts.models import User, UserProfile
 from accounts import utils
-from datetime import time
+
+from datetime import date, datetime,time
 
 # Create your models here.
 
@@ -19,6 +20,26 @@ class Vendor(models.Model):
 
     def __str__(self) -> str:
         return self.vendor_name
+    
+    def is_open(self):
+        today_date = date.today()
+        today = today_date.isoweekday()
+        tday = OpeningHours.objects.filter(vendor=self,day=today)
+        now = datetime.now()
+        current_date = now.strftime('%I:%M:%p')
+    
+        is_open = None
+        for opening in tday:
+            start = opening.from_hour
+            end = opening.to_hour
+            
+            if current_date >start and current_date< end:
+                is_open = True
+                break
+            else:
+                is_open = False
+        return is_open
+    
 
     def save(self, *args, **kwargs):
         if self.pk is not None: #check if the state of is_approved is changed
@@ -63,9 +84,11 @@ class OpeningHours(models.Model):
     to_hour = models.CharField(choices=HOURS_OF_OPENING,max_length=10)
     is_closed = models.BooleanField(default=False)
 
+   
+
     class Meta:
         ordering = ('day','from_hour')
-        unique_together = ('day','from_hour','to_hour')
+        unique_together = ('vendor','day','from_hour','to_hour')
 
     def __str__(self): 
         return self.get_day_display()    

@@ -7,6 +7,8 @@ from django.db.models import Prefetch
 from.context_processor import get_cart_count,get_cart_amounts
 from .models import Cart
 from django.contrib.auth.decorators import login_required
+from vendor.models import OpeningHours
+from datetime import date, datetime
 
 # Create your views here.
 
@@ -26,6 +28,15 @@ def listing(request):
 
 def vendordetail(request,slug):
     vendor =  get_object_or_404(Vendor, slug=slug)
+    today_date = date.today()
+    today = today_date.isoweekday()
+   
+    openighours = OpeningHours.objects.filter(vendor=vendor)
+    tday = OpeningHours.objects.filter(vendor=vendor,day=today)
+    
+
+   
+
     categry = Categry.objects.filter(vendor=vendor).prefetch_related(
         Prefetch(
             'fooditems',
@@ -41,7 +52,10 @@ def vendordetail(request,slug):
     context ={
         "vendors": vendor,
         'categories': categry,
-        'cart_item':cart_item
+        'cart_item':cart_item,
+        'day': openighours,
+        'today':tday,
+       
     }
     return render(request, 'marketplace/vendordetail.html',context)
 
