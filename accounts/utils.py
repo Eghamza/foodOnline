@@ -14,7 +14,7 @@ def detect_user(user):
         redirecturl = 'vendorDashboard'
         return redirecturl
     if user.role == 2:
-           redirecturl = 'customerDashboard'
+           redirecturl = 'customer'
            return redirecturl
     if user.role == 'none' and user.role == 'is_superadmin':
             redirecturl = '/admin'
